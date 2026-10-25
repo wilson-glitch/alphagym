@@ -19,7 +19,7 @@ export default function Location() {
 
         <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-line bg-line lg:grid-cols-2">
           <div className="space-y-8 bg-surface p-7 lg:p-9">
-            <div className="flex gap-4">
+            <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-start sm:text-left">
               <MapPin
                 className="mt-0.5 h-5 w-5 shrink-0 text-accent"
                 strokeWidth={1.75}
@@ -42,7 +42,7 @@ export default function Location() {
               </div>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-start sm:text-left">
               <Clock
                 className="mt-0.5 h-5 w-5 shrink-0 text-accent"
                 strokeWidth={1.75}
@@ -62,7 +62,7 @@ export default function Location() {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-3 pt-2">
+            <div className="flex flex-wrap justify-center gap-3 pt-2 sm:justify-start">
               <a
                 href={site.address.mapsUrl}
                 target="_blank"

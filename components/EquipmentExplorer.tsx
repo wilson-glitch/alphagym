@@ -257,15 +257,15 @@ export default function EquipmentExplorer() {
               </div>
             </div>
 
-            <div className="bg-surface p-6 lg:p-7">
+            <div className="bg-surface p-6 text-center lg:p-7 lg:text-left">
               <p className="font-display text-sm font-semibold tracking-[0.15em] text-accent uppercase">
                 {current.label}
               </p>
               <p className="mt-1 text-xs text-muted">{current.note}</p>
 
-              <ul className="mt-5 space-y-2.5">
+              <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2.5 lg:grid-cols-1">
                 {current.equipment.map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-sm">
+                  <li key={item} className="flex items-start justify-center gap-2.5 text-sm lg:justify-start">
                     <Check
                       className="mt-0.5 h-4 w-4 shrink-0 text-accent"
                       strokeWidth={2.5}
@@ -278,7 +278,7 @@ export default function EquipmentExplorer() {
             </div>
           </div>
 
-          <div className="flex flex-col items-start gap-4 border-t border-line bg-raised px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col items-center gap-4 border-t border-line bg-raised px-6 py-5 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
             <p className="text-sm text-muted">
               Peralatan lebih dari ini? Datang lihat sendiri —{" "}
               <span className="text-body">walk-in RM12</span>, guna semua mesin.

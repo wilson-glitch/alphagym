@@ -20,6 +20,7 @@ const plans = [
     name: "1 Bulan",
     price: "178",
     unit: "/ bulan",
+    perDay: "5.93",
     features: [
       "Akses tanpa had",
       "Semua kemudahan",
@@ -34,6 +35,7 @@ const plans = [
     name: "3 Bulan",
     price: "498",
     unit: "/ 3 bulan",
+    perDay: "5.53",
     saving: "Jimat RM36",
     features: [
       "Semua dalam pakej bulanan",
@@ -48,6 +50,7 @@ const plans = [
     name: "6 Bulan",
     price: "888",
     unit: "/ 6 bulan",
+    perDay: "4.93",
     saving: "Jimat RM180",
     features: [
       "Semua dalam pakej bulanan",
@@ -76,11 +79,11 @@ export default function Pricing() {
           sub="Tiada bayaran pendaftaran. Pilih yang sesuai dengan jadual anda."
         />
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line lg:grid-cols-4">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`edge-lit relative flex flex-col p-7 transition-colors duration-200 ${
+              className={`edge-lit relative flex flex-col p-5 text-center transition-colors duration-200 sm:p-7 sm:text-left ${
                 plan.popular
                   ? "bg-gradient-to-b from-accent/[0.08] to-surface"
                   : "bg-surface hover:bg-raised"
@@ -102,7 +105,7 @@ export default function Pricing() {
                 {plan.name}
               </h3>
 
-              <div className="mt-3 flex items-baseline gap-1">
+              <div className="mt-3 flex items-baseline justify-center gap-1 sm:justify-start">
                 <span className="text-sm text-muted">RM</span>
                 <span className="font-display text-4xl font-bold tracking-[-0.01em]">
                   {plan.price}
@@ -110,13 +113,19 @@ export default function Pricing() {
                 <span className="text-sm text-muted">{plan.unit}</span>
               </div>
 
+              {plan.perDay && (
+                <span className="mt-1 text-xs text-muted/80">
+                  ≈ RM{plan.perDay} / hari
+                </span>
+              )}
+
               {plan.saving && (
                 <span className="mt-1.5 text-xs font-medium text-accent">
                   {plan.saving}
                 </span>
               )}
 
-              <ul className="mt-6 flex-1 space-y-2.5">
+              <ul className="mx-auto mt-6 w-fit flex-1 space-y-2.5 text-left sm:mx-0 sm:w-auto">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-sm">
                     <Check
@@ -145,7 +154,7 @@ export default function Pricing() {
           ))}
         </div>
 
-        <div className="mt-6 flex flex-col items-start gap-4 rounded-lg border border-line bg-surface px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-6 flex flex-col items-center gap-4 rounded-lg border border-line bg-surface px-6 py-5 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
           <div>
             <p className="font-display text-lg font-semibold tracking-wide">
               Personal Training

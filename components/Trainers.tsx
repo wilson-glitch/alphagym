@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import SectionHead from "./SectionHead";
 
 const trainers = [
@@ -32,6 +36,44 @@ const trainers = [
 ];
 
 export default function Trainers() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [active, setActive] = useState(0);
+
+  const onScroll = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    const center = track.scrollLeft + track.clientWidth / 2;
+    let best = 0;
+    let bestDist = Infinity;
+    cardRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const c = el.offsetLeft + el.offsetWidth / 2;
+      const d = Math.abs(c - center);
+      if (d < bestDist) {
+        bestDist = d;
+        best = i;
+      }
+    });
+    if (best !== active) setActive(best);
+  };
+
+  const scrollTo = (i: number) => {
+    const track = trackRef.current;
+    const el = cardRefs.current[i];
+    if (!track || !el) return;
+    track.scrollTo({
+      left: el.offsetLeft - (track.clientWidth - el.offsetWidth) / 2,
+      behavior: "smooth",
+    });
+  };
+
+  // center the first card on mount
+  useEffect(() => {
+    scrollTo(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <section className="relative border-t border-line bg-ink py-20 sm:py-28">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -43,39 +85,108 @@ export default function Trainers() {
           }
           sub="Pasukan kami bukan sekadar pengawas — mereka pembimbing yang faham matlamat anda."
         />
+      </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {trainers.map((t) => (
-            <article key={t.name} className="group">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-line bg-surface">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={t.image}
-                  alt={`${t.name}, jurulatih ${t.focus} di Alpha Gym`}
-                  loading="lazy"
-                  className="h-full w-full object-cover grayscale-[0.55] transition-[filter] duration-300 group-hover:grayscale-0"
-                />
+      <div
+        ref={trackRef}
+        onScroll={onScroll}
+        className="mt-12 flex snap-x snap-mandatory items-center gap-4 overflow-x-auto scroll-smooth px-[14%] py-4 sm:px-[27%] lg:gap-6 lg:px-[35%] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {trainers.map((t, i) => {
+          const isActive = i === active;
+          return (
+            <div
+              key={t.name}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              className={`relative w-[72%] shrink-0 snap-center transition-all duration-300 sm:w-[46%] lg:w-[30%] ${
+                isActive ? "scale-100" : "scale-[0.86] opacity-50"
+              }`}
+            >
+              {isActive && (
+                <>
+                  <div
+                    className="pointer-events-none absolute inset-y-6 -left-4 w-20 bg-gradient-to-r from-accent/45 to-transparent blur-2xl"
+                    aria-hidden="true"
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-y-6 -right-4 w-20 bg-gradient-to-l from-accent/45 to-transparent blur-2xl"
+                    aria-hidden="true"
+                  />
+                </>
+              )}
+
+              <article className="group relative">
                 <div
-                  className="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent"
-                  aria-hidden="true"
-                />
-                <div
-                  className="absolute inset-0 bg-accent/10 mix-blend-color transition-opacity duration-300 group-hover:opacity-0"
-                  aria-hidden="true"
-                />
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <h3 className="font-display text-lg font-bold tracking-wide">
-                    {t.name}
-                  </h3>
-                  <p className="mt-0.5 font-display text-xs font-semibold tracking-[0.18em] text-accent uppercase">
-                    {t.focus}
-                  </p>
-                  <p className="mt-1 text-sm text-muted">{t.detail}</p>
+                  className={`relative aspect-[4/5] overflow-hidden rounded-xl border bg-surface transition-colors duration-300 ${
+                    isActive ? "border-accent/60" : "border-line"
+                  }`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={t.image}
+                    alt={`${t.name}, jurulatih ${t.focus} di Alpha Gym`}
+                    loading="lazy"
+                    className={`h-full w-full object-cover transition-[filter] duration-300 ${
+                      isActive ? "grayscale-0" : "grayscale-[0.55]"
+                    }`}
+                  />
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent"
+                    aria-hidden="true"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-5 text-center">
+                    <h3 className="font-display text-lg font-bold tracking-wide">
+                      {t.name}
+                    </h3>
+                    <p className="mt-0.5 font-display text-xs font-semibold tracking-[0.18em] text-accent uppercase">
+                      {t.focus}
+                    </p>
+                    <p className="mt-1 text-sm text-muted">{t.detail}</p>
+                  </div>
                 </div>
-              </div>
-            </article>
+              </article>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="mt-8 flex items-center justify-center gap-5">
+        <button
+          type="button"
+          onClick={() => scrollTo(Math.max(0, active - 1))}
+          disabled={active === 0}
+          aria-label="Jurulatih sebelum ini"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-body transition-colors duration-200 hover:border-raised hover:bg-raised disabled:opacity-30 disabled:hover:border-line disabled:hover:bg-transparent"
+        >
+          <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+        </button>
+
+        <div className="flex items-center gap-2">
+          {trainers.map((t, i) => (
+            <button
+              key={t.name}
+              type="button"
+              onClick={() => scrollTo(i)}
+              aria-label={`Pergi ke ${t.name}`}
+              aria-current={i === active}
+              className={`h-2 rounded-full transition-colors duration-200 ${
+                i === active ? "w-6 bg-accent" : "w-2 bg-line hover:bg-muted"
+              }`}
+            />
           ))}
         </div>
+
+        <button
+          type="button"
+          onClick={() => scrollTo(Math.min(trainers.length - 1, active + 1))}
+          disabled={active === trainers.length - 1}
+          aria-label="Jurulatih seterusnya"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-body transition-colors duration-200 hover:border-raised hover:bg-raised disabled:opacity-30 disabled:hover:border-line disabled:hover:bg-transparent"
+        >
+          <ChevronRight className="h-5 w-5" aria-hidden="true" />
+        </button>
       </div>
     </section>
   );

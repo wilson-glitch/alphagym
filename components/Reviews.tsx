@@ -24,7 +24,7 @@ export default function Reviews() {
   return (
     <section className="glow-top relative border-t border-line bg-ink-2 py-20 sm:py-28">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-end justify-between gap-4">
+        <div className="flex flex-wrap items-end justify-center gap-4 sm:justify-between">
           <SectionHead
             title={
               <>
@@ -52,7 +52,7 @@ export default function Reviews() {
           {reviews.map((r) => (
             <figure
               key={r.name}
-              className="edge-lit relative bg-surface p-7 transition-colors duration-200 hover:bg-raised"
+              className="edge-lit relative bg-surface p-7 text-center transition-colors duration-200 hover:bg-raised sm:text-left"
             >
               <span
                 className="absolute right-6 top-4 font-display text-6xl font-bold leading-none text-accent/10 select-none"
@@ -60,7 +60,7 @@ export default function Reviews() {
               >
                 &ldquo;
               </span>
-              <div className="flex" aria-label="5 daripada 5 bintang">
+              <div className="flex justify-center sm:justify-start" aria-label="5 daripada 5 bintang">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star
                     key={i}

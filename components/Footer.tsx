@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-line py-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 sm:grid-cols-3">
+        <div className="grid gap-10 text-center sm:grid-cols-3 sm:text-left">
           <div>
             <p className="font-display text-2xl font-bold tracking-wide">
               ALPHA<span className="text-accent">GYM</span>
@@ -48,7 +48,7 @@ export default function Footer() {
               <br />
               {site.address.line2}
             </address>
-            <div className="mt-4 flex gap-3">
+            <div className="mt-4 flex justify-center gap-3 sm:justify-start">
               <a
                 href={site.social.instagram}
                 target="_blank"
@@ -85,7 +85,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="mt-12 border-t border-line pt-6 text-xs text-muted">
+        <p className="mt-12 border-t border-line pt-6 text-center text-xs text-muted sm:text-left">
           © {new Date().getFullYear()} {site.name} {site.city}. Hak cipta
           terpelihara.
         </p>
