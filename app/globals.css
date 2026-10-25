@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #09090a;
+  --color-ink-2: #0e0e10;
+  --color-surface: #151517;
+  --color-raised: #1f1f22;
+  --color-line: #2a2a2e;
+  --color-accent: #facc15;
+  --color-accent-deep: #eab308;
+  --color-wa: #25d366;
+  --color-wa-deep: #1da851;
+  --color-body: #fafafa;
+  --color-muted: #a1a1aa;
+
+  --font-display: var(--font-montserrat), system-ui, sans-serif;
+  --font-sans: var(--font-open-sans), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-body);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+@utility glow-top {
+  background-image: radial-gradient(
+    60rem 24rem at 50% -8rem,
+    color-mix(in oklab, var(--color-accent) 7%, transparent),
+    transparent 70%
+  );
+}
+
+@utility glow-corner {
+  background-image: radial-gradient(
+    40rem 28rem at 88% 12%,
+    color-mix(in oklab, var(--color-accent) 6%, transparent),
+    transparent 70%
+  );
+}
+
+@utility gridlines {
+  background-image: linear-gradient(
+      to right,
+      color-mix(in oklab, var(--color-line) 55%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--color-line) 55%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 72px 72px;
+  mask-image: radial-gradient(60rem 36rem at 50% 40%, #000, transparent 75%);
+}
+
+@utility hazard {
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--color-accent) 0 10px,
+    transparent 10px 20px
+  );
+}
+
+@utility edge-lit {
+  box-shadow: inset 0 1px 0 0
+    color-mix(in oklab, var(--color-body) 7%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
