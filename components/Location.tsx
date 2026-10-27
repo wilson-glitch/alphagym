@@ -6,7 +6,7 @@ export default function Location() {
   return (
     <section
       id="lokasi"
-      className="relative border-t border-line bg-ink py-20 sm:py-28"
+      className="relative border-t border-line bg-ink py-14 sm:py-20"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead
@@ -17,7 +17,7 @@ export default function Location() {
           }
         />
 
-        <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-line bg-line lg:grid-cols-2">
+        <div className="mt-10 grid gap-px overflow-hidden rounded-xl border border-line bg-line lg:grid-cols-2">
           <div className="space-y-8 bg-surface p-7 lg:p-9">
             <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-start sm:text-left">
               <MapPin

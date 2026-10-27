@@ -21,7 +21,7 @@ export default function WhyAlpha() {
     <section
       id="kelebihan"
       aria-labelledby="kelebihan-heading"
-      className="border-t border-line bg-ink-2 py-12 sm:py-16"
+      className="border-t border-line bg-ink-2 py-10 sm:py-14"
     >
       <h2 id="kelebihan-heading" className="sr-only">
         Kelebihan Alpha Gym

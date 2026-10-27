@@ -75,7 +75,7 @@ export default function Trainers() {
   }, []);
 
   return (
-    <section className="relative border-t border-line bg-ink py-20 sm:py-28">
+    <section className="relative border-t border-line bg-ink py-14 sm:py-20">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead
           title={
@@ -90,7 +90,7 @@ export default function Trainers() {
       <div
         ref={trackRef}
         onScroll={onScroll}
-        className="mt-12 flex snap-x snap-mandatory items-center gap-4 overflow-x-auto scroll-smooth px-[14%] py-4 sm:px-[27%] lg:gap-6 lg:px-[35%] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mt-10 flex snap-x snap-mandatory items-center gap-4 overflow-x-auto scroll-smooth px-[14%] py-4 sm:px-[27%] lg:gap-6 lg:px-[35%] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {trainers.map((t, i) => {
           const isActive = i === active;

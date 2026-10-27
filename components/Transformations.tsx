@@ -27,7 +27,7 @@ const items = [
   {
     name: "Aina",
     tag: "Lebih kuat & bertenaga",
-    result: "4 bulan · ruang wanita",
+    result: "4 bulan",
     before:
       "https://images.unsplash.com/photo-1567598508481-65985588e295?w=800&q=80",
     after:
@@ -79,7 +79,7 @@ function CompareSlider({
       onPointerMove={onMove}
       onPointerUp={onUp}
       onPointerCancel={onUp}
-      className="relative aspect-[4/5] w-full cursor-ew-resize select-none overflow-hidden rounded-xl border border-line [touch-action:pan-y]"
+      className="relative aspect-[3/4] w-full cursor-ew-resize touch-none select-none overflow-hidden rounded-xl border border-line"
     >
       {/* after = base layer */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -149,7 +149,7 @@ export default function Transformations() {
   };
 
   return (
-    <section className="glow-top relative border-t border-line bg-ink-2 py-20 sm:py-28">
+    <section className="glow-top relative border-t border-line bg-ink-2 py-14 sm:py-20">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead
           title={
@@ -163,7 +163,7 @@ export default function Transformations() {
         <div
           ref={trackRef}
           onScroll={onScroll}
-          className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mt-10 flex snap-x snap-mandatory overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {items.map((it) => (
             <article key={it.name} className="w-full shrink-0 snap-center">
@@ -174,14 +174,14 @@ export default function Transformations() {
                   alt={`${it.name}, ${it.tag}`}
                 />
 
-                <div className="mt-5 text-center">
-                  <p className="font-display text-xs font-semibold tracking-[0.18em] text-accent uppercase">
-                    {it.tag}
-                  </p>
-                  <h3 className="mt-1 font-display text-xl font-bold tracking-wide">
+                <div className="mt-4 flex flex-wrap items-baseline justify-center gap-x-2.5 gap-y-0.5">
+                  <h3 className="font-display text-xl font-bold tracking-wide">
                     {it.name}
                   </h3>
-                  <p className="mt-1 text-sm text-muted">{it.result}</p>
+                  <span className="text-sm text-muted">·</span>
+                  <span className="text-sm text-accent">{it.tag}</span>
+                  <span className="text-sm text-muted">·</span>
+                  <span className="text-sm text-muted">{it.result}</span>
                 </div>
               </div>
             </article>

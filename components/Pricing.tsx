@@ -8,7 +8,7 @@ const plans = [
     price: "12",
     unit: "/ sesi",
     features: [
-      "Akses penuh ke gim",
+      "Akses penuh ke gym",
       "Guna semua kemudahan",
       "Tiada komitmen",
     ],
@@ -19,7 +19,7 @@ const plans = [
   {
     name: "1 Bulan",
     price: "178",
-    unit: "/ bulan",
+    unit: "",
     perDay: "5.93",
     features: [
       "Akses tanpa had",
@@ -34,7 +34,7 @@ const plans = [
   {
     name: "3 Bulan",
     price: "498",
-    unit: "/ 3 bulan",
+    unit: "",
     perDay: "5.53",
     saving: "Jimat RM36",
     features: [
@@ -49,7 +49,7 @@ const plans = [
   {
     name: "6 Bulan",
     price: "888",
-    unit: "/ 6 bulan",
+    unit: "",
     perDay: "4.93",
     saving: "Jimat RM180",
     features: [
@@ -67,7 +67,7 @@ export default function Pricing() {
   return (
     <section
       id="harga"
-      className="glow-corner relative border-t border-line bg-ink-2 py-20 sm:py-28"
+      className="glow-corner relative border-t border-line bg-ink-2 py-14 sm:py-20"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHead
@@ -79,11 +79,11 @@ export default function Pricing() {
           sub="Tiada bayaran pendaftaran. Pilih yang sesuai dengan jadual anda."
         />
 
-        <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line lg:grid-cols-4">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`edge-lit relative flex flex-col p-5 text-center transition-colors duration-200 sm:p-7 sm:text-left ${
+              className={`edge-lit relative flex flex-col px-5 pb-5 pt-10 text-center transition-colors duration-200 sm:p-7 sm:text-left ${
                 plan.popular
                   ? "bg-gradient-to-b from-accent/[0.08] to-surface"
                   : "bg-surface hover:bg-raised"
@@ -96,7 +96,7 @@ export default function Pricing() {
                 />
               )}
               {plan.popular && (
-                <span className="absolute right-5 top-5 rounded bg-accent px-2 py-1 font-display text-[11px] font-bold tracking-wider text-ink">
+                <span className="absolute left-1/2 top-3 -translate-x-1/2 rounded bg-accent px-2 py-1 font-display text-[11px] font-bold tracking-wider text-ink sm:left-auto sm:right-5 sm:top-5 sm:translate-x-0">
                   POPULAR
                 </span>
               )}
@@ -110,20 +110,16 @@ export default function Pricing() {
                 <span className="font-display text-4xl font-bold tracking-[-0.01em]">
                   {plan.price}
                 </span>
-                <span className="text-sm text-muted">{plan.unit}</span>
+                {plan.unit && <span className="text-sm text-muted">{plan.unit}</span>}
               </div>
 
-              {plan.perDay && (
-                <span className="mt-1 text-xs text-muted/80">
-                  ≈ RM{plan.perDay} / hari
-                </span>
-              )}
+              <span className={`mt-1 text-xs ${plan.perDay ? "text-muted/80" : "invisible"}`}>
+                {plan.perDay ? `≈ RM${plan.perDay} / hari` : " "}
+              </span>
 
-              {plan.saving && (
-                <span className="mt-1.5 text-xs font-medium text-accent">
-                  {plan.saving}
-                </span>
-              )}
+              <span className={`mt-1.5 text-xs font-medium ${plan.saving ? "text-accent" : "invisible"}`}>
+                {plan.saving || " "}
+              </span>
 
               <ul className="mx-auto mt-6 w-fit flex-1 space-y-2.5 text-left sm:mx-0 sm:w-auto">
                 {plan.features.map((f) => (

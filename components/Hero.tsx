@@ -4,7 +4,7 @@ import StatBar from "./StatBar";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[90vh] items-center overflow-hidden pt-16">
+    <section className="relative flex items-center overflow-hidden pt-16 sm:min-h-[90vh]">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -30,7 +30,7 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-20 lg:px-8">
         <div className="max-w-3xl text-center sm:text-left">
           <h1 className="font-display text-[clamp(2rem,11vw,3.75rem)] font-extrabold leading-[1.06] tracking-[-0.02em] sm:text-6xl md:text-7xl lg:text-[5.5rem]">
             Gym Terbaru di

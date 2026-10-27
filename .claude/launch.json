@@ -3,7 +3,9 @@
   "configurations": [
     {
       "name": "alpha-gym",
-      "url": "http://localhost:3001"
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "-p", "3001"],
+      "port": 3001
     }
   ]
 }

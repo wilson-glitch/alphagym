@@ -189,7 +189,7 @@ export default function EquipmentExplorer() {
   return (
     <section
       id="peralatan"
-      className="relative border-t border-line bg-ink py-20 sm:py-28"
+      className="relative border-t border-line bg-ink py-14 sm:py-20"
     >
       <div
         className="gridlines pointer-events-none absolute inset-0"
@@ -206,10 +206,10 @@ export default function EquipmentExplorer() {
           sub="Pilih otot untuk lihat peralatan yang tersedia — pastikan apa yang anda perlukan ada sebelum datang."
         />
 
-        <div className="mt-12 overflow-hidden rounded-xl border border-line shadow-2xl shadow-black/40">
-          <div className="grid lg:grid-cols-[260px_1fr_280px]">
-            <div className="border-b border-line lg:border-b-0 lg:border-r">
-              <div className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-1">
+        <div className="mt-10 overflow-hidden rounded-xl border border-line shadow-2xl shadow-black/40">
+          <div className="grid grid-cols-2 lg:grid-cols-[260px_1fr_280px]">
+            <div className="border-b border-r border-line lg:border-b-0">
+              <div className="grid grid-cols-1">
                 {order.map((key) => {
                   const m = muscles[key];
                   const isActive = key === selected;
@@ -247,7 +247,7 @@ export default function EquipmentExplorer() {
               </div>
             </div>
 
-            <div className="relative flex items-center justify-center overflow-hidden border-b border-line bg-surface p-8 lg:border-b-0 lg:border-r">
+            <div className="relative flex items-center justify-center overflow-hidden border-b border-line bg-surface p-4 sm:p-8 lg:border-b-0 lg:border-r">
               <div
                 className="pointer-events-none absolute inset-0 bg-[radial-gradient(22rem_22rem_at_50%_50%,color-mix(in_oklab,var(--color-accent)_9%,transparent),transparent_70%)]"
                 aria-hidden="true"
@@ -257,15 +257,15 @@ export default function EquipmentExplorer() {
               </div>
             </div>
 
-            <div className="bg-surface p-6 text-center lg:p-7 lg:text-left">
+            <div className="col-span-2 bg-surface p-6 text-center lg:col-span-1 lg:p-7 lg:text-left">
               <p className="font-display text-sm font-semibold tracking-[0.15em] text-accent uppercase">
                 {current.label}
               </p>
               <p className="mt-1 text-xs text-muted">{current.note}</p>
 
-              <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2.5 lg:grid-cols-1">
+              <ul className="mx-auto mt-5 grid w-fit grid-cols-2 gap-x-4 gap-y-2.5 text-left lg:mx-0 lg:w-auto lg:grid-cols-1">
                 {current.equipment.map((item) => (
-                  <li key={item} className="flex items-start justify-center gap-2.5 text-sm lg:justify-start">
+                  <li key={item} className="flex items-start gap-2.5 text-sm">
                     <Check
                       className="mt-0.5 h-4 w-4 shrink-0 text-accent"
                       strokeWidth={2.5}
