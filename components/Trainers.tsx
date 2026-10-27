@@ -66,10 +66,12 @@ export default function Trainers() {
     const track = trackRef.current;
     const el = cardRefs.current[i];
     if (!track || !el) return;
+    const clamped = Math.max(0, Math.min(trainers.length - 1, i));
     track.scrollTo({
       left: el.offsetLeft - (track.clientWidth - el.offsetWidth) / 2,
       behavior: "smooth",
     });
+    setActive(clamped);
   };
 
   // center the first card on mount
