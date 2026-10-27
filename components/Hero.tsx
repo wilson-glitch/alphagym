@@ -1,10 +1,9 @@
 import { ArrowRight, Tag } from "lucide-react";
 import { site, waLink } from "@/lib/site";
-import StatBar from "./StatBar";
 
 export default function Hero() {
   return (
-    <section className="relative flex items-center overflow-hidden pt-16 sm:min-h-[90vh]">
+    <section className="relative flex min-h-[100svh] items-center overflow-hidden pt-16">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -30,7 +29,7 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-20 lg:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-8 lg:px-8">
         <div className="max-w-3xl text-center sm:text-left">
           <h1 className="font-display text-[clamp(2rem,11vw,3.75rem)] font-extrabold leading-[1.06] tracking-[-0.02em] sm:text-6xl md:text-7xl lg:text-[5.5rem]">
             Gym Terbaru di
@@ -74,23 +73,20 @@ export default function Hero() {
 
             <a
               href="#harga"
-              className="group inline-flex items-center justify-center gap-1.5 self-center font-display text-sm font-semibold tracking-wide text-accent transition-colors duration-200 hover:text-accent-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:self-start"
+              className="group flex items-center gap-4 rounded-lg border border-accent/50 bg-ink/60 px-6 py-4 text-left shadow-lg shadow-accent/25 backdrop-blur-sm transition-all duration-200 hover:border-accent hover:bg-ink/80 hover:shadow-accent/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
-              <Tag className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
-              <span className="border-b border-accent/40 pb-0.5 transition-colors duration-200 group-hover:border-accent-deep">
-                Lihat harga &amp; pakej
+              <Tag className="h-5 w-5 shrink-0 text-accent" strokeWidth={2} aria-hidden="true" />
+              <span className="min-w-0 flex-1 text-center font-display text-base font-bold tracking-wide text-body sm:text-left">
+                LIHAT HARGA &amp; PAKEJ
               </span>
               <ArrowRight
-                className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                className="h-5 w-5 shrink-0 text-accent/80 transition-transform duration-200 group-hover:translate-x-0.5"
                 aria-hidden="true"
               />
             </a>
           </div>
         </div>
 
-        <div className="mx-auto mt-10 max-w-sm sm:mx-0 sm:mt-14 sm:max-w-xl">
-          <StatBar />
-        </div>
       </div>
     </section>
   );

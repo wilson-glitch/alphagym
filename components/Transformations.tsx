@@ -8,8 +8,9 @@ import SectionHead from "./SectionHead";
 const items = [
   {
     name: "Hafiz",
-    tag: "Dari gemuk ke fit",
-    result: "−20kg · 6 bulan",
+    age: 28,
+    result: "−20kg",
+    duration: "6 bulan",
     before:
       "https://images.unsplash.com/photo-1549476464-37392f717541?w=800&q=80",
     after:
@@ -17,8 +18,9 @@ const items = [
   },
   {
     name: "Danial",
-    tag: "Dari kurus ke berisi",
-    result: "+8kg otot · 5 bulan",
+    age: 24,
+    result: "+8kg otot",
+    duration: "5 bulan",
     before:
       "https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=800&q=80",
     after:
@@ -26,8 +28,9 @@ const items = [
   },
   {
     name: "Aina",
-    tag: "Lebih kuat & bertenaga",
-    result: "4 bulan",
+    age: 26,
+    result: "Lebih kuat",
+    duration: "4 bulan",
     before:
       "https://images.unsplash.com/photo-1567598508481-65985588e295?w=800&q=80",
     after:
@@ -168,9 +171,15 @@ export default function Transformations() {
             <div className="mt-8 hidden lg:block">
               <h3 className="font-display text-3xl font-bold tracking-wide">
                 {current.name}
+                <span className="ml-3 text-xl font-semibold text-muted">
+                  {current.age} tahun
+                </span>
               </h3>
-              <p className="mt-2 text-lg text-accent">{current.tag}</p>
-              <p className="mt-1 text-sm text-muted">{current.result}</p>
+              <p className="mt-2 text-lg">
+                <span className="font-semibold text-accent">{current.result}</span>
+                <span className="mx-2 text-muted">·</span>
+                <span className="text-muted">{current.duration}</span>
+              </p>
             </div>
 
             {/* Nav dots + arrows */}
@@ -240,7 +249,7 @@ export default function Transformations() {
                     <CompareSlider
                       before={it.before}
                       after={it.after}
-                      alt={`${it.name}, ${it.tag}`}
+                      alt={`${it.name}, ${it.result} dalam ${it.duration}`}
                     />
                   </div>
                 </article>
@@ -248,14 +257,18 @@ export default function Transformations() {
             </div>
 
             {/* Mobile: info + nav + CTA below slider */}
-            <div className="mt-4 flex flex-wrap items-baseline justify-center gap-x-2.5 gap-y-0.5 lg:hidden">
+            <div className="mt-4 text-center lg:hidden">
               <h3 className="font-display text-xl font-bold tracking-wide">
                 {current.name}
+                <span className="ml-2 text-base font-semibold text-muted">
+                  {current.age} tahun
+                </span>
               </h3>
-              <span className="text-sm text-muted">·</span>
-              <span className="text-sm text-accent">{current.tag}</span>
-              <span className="text-sm text-muted">·</span>
-              <span className="text-sm text-muted">{current.result}</span>
+              <p className="mt-1 text-sm">
+                <span className="font-semibold text-accent">{current.result}</span>
+                <span className="mx-2 text-muted">·</span>
+                <span className="text-muted">{current.duration}</span>
+              </p>
             </div>
 
             <div className="mt-6 flex items-center justify-center gap-5 lg:hidden">
