@@ -38,24 +38,28 @@ const trainers = [
 export default function Trainers() {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [active, setActive] = useState(0);
 
   const onScroll = () => {
     const track = trackRef.current;
     if (!track) return;
-    const center = track.scrollLeft + track.clientWidth / 2;
-    let best = 0;
-    let bestDist = Infinity;
-    cardRefs.current.forEach((el, i) => {
-      if (!el) return;
-      const c = el.offsetLeft + el.offsetWidth / 2;
-      const d = Math.abs(c - center);
-      if (d < bestDist) {
-        bestDist = d;
-        best = i;
-      }
-    });
-    if (best !== active) setActive(best);
+    if (scrollTimer.current) clearTimeout(scrollTimer.current);
+    scrollTimer.current = setTimeout(() => {
+      const center = track.scrollLeft + track.clientWidth / 2;
+      let best = 0;
+      let bestDist = Infinity;
+      cardRefs.current.forEach((el, i) => {
+        if (!el) return;
+        const c = el.offsetLeft + el.offsetWidth / 2;
+        const d = Math.abs(c - center);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      });
+      if (best !== active) setActive(best);
+    }, 90);
   };
 
   const scrollTo = (i: number) => {

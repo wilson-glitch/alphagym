@@ -134,6 +134,7 @@ function CompareSlider({
 
 export default function Transformations() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const scrollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [index, setIndex] = useState(0);
 
   const scrollTo = (i: number) => {
@@ -147,8 +148,11 @@ export default function Transformations() {
   const onScroll = () => {
     const track = trackRef.current;
     if (!track) return;
-    const i = Math.round(track.scrollLeft / track.clientWidth);
-    if (i !== index) setIndex(i);
+    if (scrollTimer.current) clearTimeout(scrollTimer.current);
+    scrollTimer.current = setTimeout(() => {
+      const i = Math.round(track.scrollLeft / track.clientWidth);
+      if (i !== index) setIndex(i);
+    }, 90);
   };
 
   const current = items[index];
@@ -257,7 +261,7 @@ export default function Transformations() {
             </div>
 
             {/* Mobile: info + nav + CTA below slider */}
-            <div className="mt-4 text-center lg:hidden">
+            <div className="mt-4 min-h-[52px] text-center lg:hidden">
               <h3 className="font-display text-xl font-bold tracking-wide">
                 {current.name}
                 <span className="ml-2 text-base font-semibold text-muted">
