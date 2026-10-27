@@ -148,92 +148,168 @@ export default function Transformations() {
     if (i !== index) setIndex(i);
   };
 
+  const current = items[index];
+
   return (
     <section className="glow-top relative border-t border-line bg-ink-2 py-14 sm:py-20">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHead
-          title={
-            <>
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+          {/* Left — heading + current info + nav + CTA (desktop) */}
+          <div className="text-center lg:text-left">
+            <h2 className="font-display text-4xl font-bold tracking-[-0.01em] sm:text-5xl lg:text-6xl">
               Transformasi <span className="text-accent">Sebenar</span>
-            </>
-          }
-          sub="Hasil datang dari konsistensi — seret pembahagi untuk lihat sebelum & selepas."
-        />
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-muted lg:mx-0">
+              Hasil datang dari konsistensi — seret pembahagi untuk lihat
+              sebelum & selepas.
+            </p>
 
-        <div
-          ref={trackRef}
-          onScroll={onScroll}
-          className="mt-10 flex snap-x snap-mandatory overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {items.map((it) => (
-            <article key={it.name} className="w-full shrink-0 snap-center">
-              <div className="mx-auto max-w-md">
-                <CompareSlider
-                  before={it.before}
-                  after={it.after}
-                  alt={`${it.name}, ${it.tag}`}
-                />
+            {/* Current person info — desktop only inline, mobile under slider */}
+            <div className="mt-8 hidden lg:block">
+              <h3 className="font-display text-3xl font-bold tracking-wide">
+                {current.name}
+              </h3>
+              <p className="mt-2 text-lg text-accent">{current.tag}</p>
+              <p className="mt-1 text-sm text-muted">{current.result}</p>
+            </div>
 
-                <div className="mt-4 flex flex-wrap items-baseline justify-center gap-x-2.5 gap-y-0.5">
-                  <h3 className="font-display text-xl font-bold tracking-wide">
-                    {it.name}
-                  </h3>
-                  <span className="text-sm text-muted">·</span>
-                  <span className="text-sm text-accent">{it.tag}</span>
-                  <span className="text-sm text-muted">·</span>
-                  <span className="text-sm text-muted">{it.result}</span>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-6 flex items-center justify-center gap-5">
-          <button
-            type="button"
-            onClick={() => scrollTo(index - 1)}
-            disabled={index === 0}
-            aria-label="Transformasi sebelum ini"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-body transition-colors duration-200 hover:border-raised hover:bg-raised disabled:opacity-30 disabled:hover:border-line disabled:hover:bg-transparent"
-          >
-            <ChevronLeft className="h-5 w-5" aria-hidden="true" />
-          </button>
-
-          <div className="flex items-center gap-2">
-            {items.map((_, i) => (
+            {/* Nav dots + arrows */}
+            <div className="mt-6 hidden items-center gap-5 lg:flex">
               <button
-                key={i}
                 type="button"
-                onClick={() => scrollTo(i)}
-                aria-label={`Pergi ke transformasi ${i + 1}`}
-                aria-current={i === index}
-                className={`h-2 rounded-full transition-colors duration-200 ${
-                  i === index ? "w-6 bg-accent" : "w-2 bg-line hover:bg-muted"
-                }`}
-              />
-            ))}
+                onClick={() => scrollTo(index - 1)}
+                disabled={index === 0}
+                aria-label="Transformasi sebelum ini"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-body transition-colors duration-200 hover:border-raised hover:bg-raised disabled:opacity-30 disabled:hover:border-line disabled:hover:bg-transparent"
+              >
+                <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+              </button>
+
+              <div className="flex items-center gap-2">
+                {items.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => scrollTo(i)}
+                    aria-label={`Pergi ke transformasi ${i + 1}`}
+                    aria-current={i === index}
+                    className={`h-2 rounded-full transition-colors duration-200 ${
+                      i === index
+                        ? "w-6 bg-accent"
+                        : "w-2 bg-line hover:bg-muted"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => scrollTo(index + 1)}
+                disabled={index === items.length - 1}
+                aria-label="Transformasi seterusnya"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-body transition-colors duration-200 hover:border-raised hover:bg-raised disabled:opacity-30 disabled:hover:border-line disabled:hover:bg-transparent"
+              >
+                <ChevronRight className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
+
+            <div className="mt-8 hidden lg:block">
+              <a
+                href={waLink(
+                  "Hi Alpha Gym, saya nak mula transformasi saya.",
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-md bg-wa px-6 py-3 font-display text-sm font-semibold tracking-wide text-white transition-colors duration-200 hover:bg-wa-deep"
+              >
+                MULA TRANSFORMASI ANDA
+              </a>
+            </div>
           </div>
 
-          <button
-            type="button"
-            onClick={() => scrollTo(index + 1)}
-            disabled={index === items.length - 1}
-            aria-label="Transformasi seterusnya"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-body transition-colors duration-200 hover:border-raised hover:bg-raised disabled:opacity-30 disabled:hover:border-line disabled:hover:bg-transparent"
-          >
-            <ChevronRight className="h-5 w-5" aria-hidden="true" />
-          </button>
-        </div>
+          {/* Right — slider carousel */}
+          <div>
+            <div
+              ref={trackRef}
+              onScroll={onScroll}
+              className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {items.map((it) => (
+                <article key={it.name} className="w-full shrink-0 snap-center">
+                  <div className="mx-auto max-w-md lg:max-w-none">
+                    <CompareSlider
+                      before={it.before}
+                      after={it.after}
+                      alt={`${it.name}, ${it.tag}`}
+                    />
+                  </div>
+                </article>
+              ))}
+            </div>
 
-        <div className="mt-8 flex justify-center">
-          <a
-            href={waLink("Hi Alpha Gym, saya nak mula transformasi saya.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-md bg-wa px-6 py-3 font-display text-sm font-semibold tracking-wide text-white transition-colors duration-200 hover:bg-wa-deep"
-          >
-            MULA TRANSFORMASI ANDA
-          </a>
+            {/* Mobile: info + nav + CTA below slider */}
+            <div className="mt-4 flex flex-wrap items-baseline justify-center gap-x-2.5 gap-y-0.5 lg:hidden">
+              <h3 className="font-display text-xl font-bold tracking-wide">
+                {current.name}
+              </h3>
+              <span className="text-sm text-muted">·</span>
+              <span className="text-sm text-accent">{current.tag}</span>
+              <span className="text-sm text-muted">·</span>
+              <span className="text-sm text-muted">{current.result}</span>
+            </div>
+
+            <div className="mt-6 flex items-center justify-center gap-5 lg:hidden">
+              <button
+                type="button"
+                onClick={() => scrollTo(index - 1)}
+                disabled={index === 0}
+                aria-label="Transformasi sebelum ini"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-body transition-colors duration-200 hover:border-raised hover:bg-raised disabled:opacity-30 disabled:hover:border-line disabled:hover:bg-transparent"
+              >
+                <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+              </button>
+
+              <div className="flex items-center gap-2">
+                {items.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => scrollTo(i)}
+                    aria-label={`Pergi ke transformasi ${i + 1}`}
+                    aria-current={i === index}
+                    className={`h-2 rounded-full transition-colors duration-200 ${
+                      i === index
+                        ? "w-6 bg-accent"
+                        : "w-2 bg-line hover:bg-muted"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => scrollTo(index + 1)}
+                disabled={index === items.length - 1}
+                aria-label="Transformasi seterusnya"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-body transition-colors duration-200 hover:border-raised hover:bg-raised disabled:opacity-30 disabled:hover:border-line disabled:hover:bg-transparent"
+              >
+                <ChevronRight className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
+
+            <div className="mt-8 flex justify-center lg:hidden">
+              <a
+                href={waLink(
+                  "Hi Alpha Gym, saya nak mula transformasi saya.",
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-md bg-wa px-6 py-3 font-display text-sm font-semibold tracking-wide text-white transition-colors duration-200 hover:bg-wa-deep"
+              >
+                MULA TRANSFORMASI ANDA
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -90,7 +90,7 @@ export default function Trainers() {
       <div
         ref={trackRef}
         onScroll={onScroll}
-        className="mt-10 flex snap-x snap-mandatory items-center gap-4 overflow-x-auto scroll-smooth px-[14%] py-4 sm:px-[27%] lg:gap-6 lg:px-[35%] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mt-10 flex snap-x snap-mandatory items-center gap-4 overflow-x-auto scroll-smooth px-[14%] py-4 sm:px-[27%] lg:gap-6 lg:px-[18%] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {trainers.map((t, i) => {
           const isActive = i === active;
@@ -100,7 +100,7 @@ export default function Trainers() {
               ref={(el) => {
                 cardRefs.current[i] = el;
               }}
-              className={`relative w-[72%] shrink-0 snap-center transition-all duration-300 sm:w-[46%] lg:w-[30%] ${
+              className={`relative w-[72%] shrink-0 snap-center transition-all duration-300 sm:w-[46%] lg:w-[44%] ${
                 isActive ? "scale-100" : "scale-[0.86] opacity-50"
               }`}
             >
